@@ -12,11 +12,10 @@ module.exports = {
   },
   create: async (request, response) => {
     const { nama, file } = request.body;
-    let fileUpload = request.file === undefined ? "" : request.file.filename;
 
     const setData = {
       nama,
-      file: fileUpload,
+      file: file,
     };
     try {
       const result = await create(setData);

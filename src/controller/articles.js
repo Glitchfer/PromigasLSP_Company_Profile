@@ -13,12 +13,11 @@ module.exports = {
 
   create: async (request, response) => {
     const { title, body, file } = request.body;
-    let fileUpload = request.file === undefined ? "" : request.file.filename;
 
     const setData = {
       title,
       body,
-      file: fileUpload
+      file: file
     };
     try {
       const result = await create(setData);
@@ -28,39 +27,6 @@ module.exports = {
     }
   },
 
-  // create: async (request, response) => {
-  //   try {
-  //     const {
-  //       title,
-  //       body,
-  //       // file,
-  //     } = request.body;
-  //     let fileUpload = request.file === undefined ? "" : request.file.filename;
-  //     if (image !== "") {
-  //       const setData = {
-  //         title,
-  //         body,
-  //         // file: fileUpload,
-  //       };
-  //       const result = await create(setData);
-  //       return helper.response(
-  //         response,
-  //         200,
-  //         "Berhasil menambahkan artikerl terbaru!",
-  //         result
-  //       );
-  //     } else {
-  //       return helper.response(
-  //         response,
-  //         400,
-  //         "upload file gagal"
-  //       );
-  //     }
-  //   } catch (error) {
-  //     return helper.response(response, 400, "Bad Request", error);
-  //   }
-  // },
-
   update: async (request, response) => {
     const { title, body, file } = request.body;
     const id = request.params.id;
@@ -68,6 +34,7 @@ module.exports = {
     const setData = {
       title,
       body,
+      file
     };
     try {
       const result = await update(setData, id);
