@@ -22,11 +22,15 @@ const fileFilter = (request, file, callback) => {
   ) {
     callback(null, true);
   } else {
-    return callback(new Error("Extension File harus dalam bentuk jpeg, jpg atau png"));
+    return callback(
+      new Error("Extension File harus dalam bentuk jpeg, jpg atau png")
+    );
   }
 };
 
-let upload = multer({ storage, fileFilter }).single("file");
+const limits = { fileSize: 1024 * 1024 * 1 };
+
+let upload = multer({ storage, fileFilter, limits }).single("file");
 
 const uploadFilter = (request, response, next) => {
   upload(request, response, function (err) {
