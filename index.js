@@ -23,6 +23,7 @@ app.use((request, response, next) => {
 });
 
 app.use("/", routerNavigation);
+app.use("/uploads", express.static("uploads"));
 
 app.get("*", (request, response) => {
   response.status(404).send("Path Not Found !");

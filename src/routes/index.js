@@ -8,6 +8,7 @@ const asesi = require("./asesi");
 const galeri = require("./galeri");
 const skema = require("./skema");
 const agenda = require("./agenda");
+const uploader = require("./uploader");
 
 route.use("/users", users);
 route.use("/articles", articles);
@@ -17,5 +18,6 @@ route.use("/asesi", asesi);
 route.use("/galeri", galeri);
 route.use("/skema", skema);
 route.use("/agenda", agenda);
+route.use("/uploader", uploader);
 
 module.exports = route;
