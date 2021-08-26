@@ -15,6 +15,7 @@ route.use("/tuk", tuk);
 route.use("/asesor", asesor);
 route.use("/asesi", asesi);
 route.use("/galeri", galeri);
+route.use("/skema", skema);
 route.use("/agenda", agenda);
 
 module.exports = route;
