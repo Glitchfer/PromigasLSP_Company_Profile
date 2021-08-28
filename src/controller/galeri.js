@@ -14,14 +14,18 @@ module.exports = {
     const { file, caption } = request.body;
     // let fileUpload = request.file === undefined ? "" : request.file.filename;
 
-
     const setData = {
       file: file,
       caption,
     };
     try {
       const result = await create(setData);
-      return helper.response(response, 200, "Berhasil menambahkan foto baru", result);
+      return helper.response(
+        response,
+        200,
+        "Berhasil menambahkan foto baru",
+        result
+      );
     } catch (error) {
       return helper.response(response, 400, "Bad Request");
     }
@@ -33,11 +37,16 @@ module.exports = {
     const setData = {
       file,
       caption,
-      updated_at: new Date()
+      updated_at: new Date(),
     };
     try {
       const result = await update(setData, id);
-      return helper.response(response, 200, "Perubahan berhasil disimpan", result);
+      return helper.response(
+        response,
+        200,
+        "Perubahan berhasil disimpan",
+        result
+      );
     } catch (error) {
       return helper.response(response, 400, "Bad Request");
     }
