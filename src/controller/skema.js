@@ -11,10 +11,10 @@ module.exports = {
     }
   },
   create: async (request, response) => {
-    const { nama, file } = request.body;
+    const { nama_skema, file } = request.body;
 
     const setData = {
-      nama,
+      nama_skema,
       file: file,
     };
     try {
@@ -31,11 +31,11 @@ module.exports = {
   },
 
   update: async (request, response) => {
-    const { nama, file } = request.body;
+    const { nama_skema, file } = request.body;
     const id = request.params.id;
 
     const setData = {
-      nama,
+      nama_skema,
       file,
       updated_at: new Date(),
     };
