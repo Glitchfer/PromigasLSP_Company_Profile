@@ -1,13 +1,16 @@
 const router = require("express").Router();
 const { authorization } = require("../middleware/auth");
-const uploadFilterPdf = require("../middleware/Multer");
-const { getAll, create, update, deleteData } = require("../controller/articles");
+const uploadFilterPdf = require("../middleware/multer");
+const {
+  getAll,
+  create,
+  update,
+  deleteData,
+} = require("../controller/articles");
 
 router.get("/", getAll);
 router.post("/", authorization, uploadFilterPdf, create);
 router.patch("/:id", update);
-router.delete("/:id", deleteData)
-
-
+router.delete("/:id", deleteData);
 
 module.exports = router;
