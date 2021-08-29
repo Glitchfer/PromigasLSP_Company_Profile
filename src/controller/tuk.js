@@ -19,7 +19,12 @@ module.exports = {
     };
     try {
       const result = await create(setData);
-      return helper.response(response, 200, "Berhasil menambahkan data baru", result);
+      return helper.response(
+        response,
+        200,
+        "Berhasil menambahkan data baru",
+        result
+      );
     } catch (error) {
       return helper.response(response, 400, "Bad Request");
     }
@@ -31,11 +36,16 @@ module.exports = {
     const setData = {
       nama_tuk,
       alamat_tuk,
-      updated_at: new Date()
+      updated_at: new Date(),
     };
     try {
       const result = await update(setData, id);
-      return helper.response(response, 200, "Perubahan berhasil disimpan", result);
+      return helper.response(
+        response,
+        200,
+        "Perubahan berhasil disimpan",
+        result
+      );
     } catch (error) {
       return helper.response(response, 400, "Bad Request");
     }

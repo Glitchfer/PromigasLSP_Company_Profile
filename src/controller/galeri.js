@@ -12,8 +12,6 @@ module.exports = {
   },
   create: async (request, response) => {
     const { file, caption } = request.body;
-    // let fileUpload = request.file === undefined ? "" : request.file.filename;
-
     const setData = {
       file: file,
       caption,
