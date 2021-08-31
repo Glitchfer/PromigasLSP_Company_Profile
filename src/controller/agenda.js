@@ -11,13 +11,14 @@ module.exports = {
     }
   },
   create: async (request, response) => {
-    const { title, start_time, end_time, location } = request.body;
+    const { title, start_time, end_time, location, description } = request.body;
 
     const setData = {
       title,
       start_time,
       end_time,
       location,
+      description
     };
     try {
       const result = await create(setData);
@@ -40,6 +41,7 @@ module.exports = {
       start_time,
       end_time,
       location,
+      description,
       updated_at: new Date(),
     };
     try {

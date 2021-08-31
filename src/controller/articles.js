@@ -1,5 +1,5 @@
 const helper = require("../helper");
-const { getAll, create, update, deleteData } = require("../model/articles");
+const { getAll, getById, create, update, deleteData } = require("../model/articles");
 
 module.exports = {
   getAll: async (request, response) => {
@@ -8,6 +8,28 @@ module.exports = {
       return helper.response(response, 200, "Success", result);
     } catch (error) {
       return helper.response(response, 400, "Bad Request");
+    }
+  },
+  getById: async (request, response) => {
+    try {
+      const { id } = request.params;
+      const result = await getById(id);
+      if (result.length > 0) {
+        return helper.response(
+          response,
+          200,
+          "Success Get Article by ID",
+          result
+        );
+      } else {
+        return helper.response(
+          response,
+          404,
+          `ID Article : ${id} Not Found`
+        );
+      }
+    } catch (error) {
+      return helper.response(response, 400, "Bad Request", error);
     }
   },
 

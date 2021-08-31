@@ -12,6 +12,17 @@ module.exports = {
       });
     });
   },
+  getById: (id) => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "SELECT * FROM articles WHERE id = ?",
+        id,
+        (error, result) => {
+          !error ? resolve(result) : reject(new Error(error));
+        }
+      );
+    });
+  },
   create: (setData) => {
     return new Promise((resolve, reject) => {
       connection.query("INSERT INTO articles SET ?", setData, (error, result) => {
