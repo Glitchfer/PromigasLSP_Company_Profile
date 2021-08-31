@@ -1,13 +1,65 @@
 const helper = require("../helper");
-const { getAll, create, update, deleteData } = require("../model/skema");
+const { getAll, getDataCount, create, update, deleteData } = require("../model/skema");
+const qs = require("querystring");
+
+const getPrevLink = (page, currentQuery) => {
+  if (page > 1) {
+    const generatedPage = {
+      page: page - 1,
+    };
+    const resultPrevLink = { ...currentQuery, ...generatedPage };
+    return qs.stringify(resultPrevLink);
+  } else {
+    return null;
+  }
+};
+
+const getNextLink = (page, totalPage, currentQuery) => {
+  if (page < totalPage) {
+    const generatedPage = {
+      page: page + 1,
+    };
+    const resultNextLink = { ...currentQuery, ...generatedPage };
+    return qs.stringify(resultNextLink);
+  } else {
+    return null;
+  }
+};
+
 
 module.exports = {
   getAll: async (request, response) => {
+    let { page, limit } = request.query;
+    page = parseInt(page);
+    limit = parseInt(limit);
+    let totalData = await getDataCount();
+    let totalPage = Math.ceil(totalData / limit);
+    let offset = page * limit - limit;
+    let prevLink = getPrevLink(page, request.query);
+    let nextLink = getNextLink(page, totalPage, request.query);
+
+    const pageInfo = {
+      page,
+      totalPage,
+      limit,
+      totalData,
+      prevLink: prevLink && `http://127.0.0.1:3002/skema?${prevLink}`,
+      nextLink: nextLink && `http://127.0.0.1:3002/skema?${nextLink}`,
+    };
     try {
-      const result = await getAll();
-      return helper.response(response, 200, "Success", result);
+      const result = await getAll(limit, offset);
+      const newData = {
+        result,
+        pageInfo,
+      };
+      return helper.response(
+        response,
+        200,
+        "Success Get Data",
+        newData
+      );
     } catch (error) {
-      return helper.response(response, 400, "Bad Request");
+      return helper.response(response, 400, "Bad Request", error);
     }
   },
   create: async (request, response) => {

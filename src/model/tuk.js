@@ -1,15 +1,25 @@
 const connection = require("../config/mysql");
 
 module.exports = {
-  getAll: () => {
+  getAll: (limit, offset) => {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * from tuk", (error, result) => {
-        if (!error) {
-          resolve(result);
-        } else {
-          reject(new Error(error));
+      connection.query(
+        `SELECT * FROM tuk LIMIT ? OFFSET ?`,
+        [limit, offset],
+        (error, result) => {
+          !error ? resolve(result) : reject(new Error(error));
         }
-      });
+      );
+    });
+  },
+  getDataCount: () => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "SELECT COUNT(*) as total FROM tuk",
+        (error, result) => {
+          !error ? resolve(result[0].total) : reject(new Error(error));
+        }
+      );
     });
   },
   create: (setData) => {
