@@ -22,7 +22,7 @@ app.use((request, response, next) => {
   next();
 });
 
-app.use("/", routerNavigation);
+app.use("/api", routerNavigation);
 app.use("/uploads", express.static("uploads"));
 
 app.get("*", (request, response) => {
