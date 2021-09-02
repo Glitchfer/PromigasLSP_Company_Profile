@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2021 at 12:38 PM
+-- Generation Time: Aug 31, 2021 at 03:57 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -33,6 +33,7 @@ CREATE TABLE `agenda` (
   `start_time` timestamp NULL DEFAULT NULL,
   `end_time` timestamp NULL DEFAULT NULL,
   `location` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -41,8 +42,8 @@ CREATE TABLE `agenda` (
 -- Dumping data for table `agenda`
 --
 
-INSERT INTO `agenda` (`id`, `title`, `start_time`, `end_time`, `location`, `created_at`, `updated_at`) VALUES
-(1, 'test 1', '2021-08-29 09:33:40', '2021-08-31 09:33:40', 'test', '2021-08-29 09:34:06', NULL);
+INSERT INTO `agenda` (`id`, `title`, `start_time`, `end_time`, `location`, `description`, `created_at`, `updated_at`) VALUES
+(4, 'Test 1 | Lorem Ipsum', '2021-09-01 00:00:01', '2021-09-01 03:00:00', 'Via Zoom', '', '2021-08-30 18:23:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -53,7 +54,7 @@ INSERT INTO `agenda` (`id`, `title`, `start_time`, `end_time`, `location`, `crea
 CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `body` varchar(255) DEFAULT NULL,
+  `body` longtext DEFAULT NULL,
   `file` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -63,12 +64,9 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `body`, `file`, `created_at`) VALUES
-(1, 'Pelatihan 1', 'Berikut adalah pelatihan 1', 'pelatihan1.pdf', '2021-08-11 04:33:09'),
-(2, 'Pelatihan 3', 'Berikut adalah pelatihan 3', NULL, '2021-08-11 04:35:00'),
-(4, 'Pelatihan 4', 'Berikut adalah pelatihan 4', NULL, '2021-08-11 06:14:53'),
-(5, 'Pelatihan 5', 'Berikut adalah pelatihan 5', '', '2021-08-11 10:09:52'),
-(6, 'Pelatihan 5', 'Berikut adalah pelatihan 5', '2021-08-11T10-18-38.044Z-s.png', '2021-08-11 10:18:38'),
-(7, 'Pelatihan 6', 'Berikut adalah pelatihan 6', '2021-08-11T11-04-05.026Z-FORMAT COVER LP PTI 3.pdf', '2021-08-11 11:04:05');
+(8, 'Lorem Ipsum', '<h2>Where can I get some?</h2><p class=\"ql-align-justify\">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believ', '2021-08-30T17-15-15.193Z-images.png', '2021-08-30 16:15:55'),
+(11, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.', '<h2>Where does it come from?</h2><p class=\"ql-align-justify\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin pr', '2021-08-30T16-56-21.078Z-2zsuz50-1280x720.jpg', '2021-08-30 16:56:57'),
+(12, 'Test 334 | \"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"', '<h2>Where does it come from?</h2><p class=\"ql-align-justify\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p class=\"ql-align-justify\">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p><p><br></p>', '2021-08-31T02-02-57.730Z-5-Benda-yang-Semakin-Mewah-dengan-Taburan-Kristal-Swarovski-1280x720.jpg', '2021-08-31 02:03:22');
 
 -- --------------------------------------------------------
 
@@ -274,13 +272,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `asesi`

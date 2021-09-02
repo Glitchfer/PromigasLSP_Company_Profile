@@ -1,5 +1,11 @@
 const helper = require("../helper");
-const { getAll, getDataCount, create, update, deleteData } = require("../model/skema");
+const {
+  getAll,
+  getDataCount,
+  create,
+  update,
+  deleteData,
+} = require("../model/skema");
 const qs = require("querystring");
 
 const getPrevLink = (page, currentQuery) => {
@@ -26,7 +32,6 @@ const getNextLink = (page, totalPage, currentQuery) => {
   }
 };
 
-
 module.exports = {
   getAll: async (request, response) => {
     let { page, limit } = request.query;
@@ -38,6 +43,7 @@ module.exports = {
     let prevLink = getPrevLink(page, request.query);
     let nextLink = getNextLink(page, totalPage, request.query);
 
+    console.log("totalData", totalData);
     const pageInfo = {
       page,
       totalPage,
@@ -46,18 +52,15 @@ module.exports = {
       prevLink: prevLink && `http://127.0.0.1:3002/skema?${prevLink}`,
       nextLink: nextLink && `http://127.0.0.1:3002/skema?${nextLink}`,
     };
+    console.log("pageInfo", pageInfo);
     try {
       const result = await getAll(limit, offset);
+      console.log("Hereeeee", result);
       const newData = {
         result,
         pageInfo,
       };
-      return helper.response(
-        response,
-        200,
-        "Success Get Data",
-        newData
-      );
+      return helper.response(response, 200, "Success Get Data", newData);
     } catch (error) {
       return helper.response(response, 400, "Bad Request", error);
     }

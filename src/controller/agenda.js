@@ -1,5 +1,11 @@
 const helper = require("../helper");
-const { getAll, create, update, deleteData } = require("../model/agenda");
+const {
+  getAll,
+  getById,
+  create,
+  update,
+  deleteData,
+} = require("../model/agenda");
 
 module.exports = {
   getAll: async (request, response) => {
@@ -10,6 +16,24 @@ module.exports = {
       return helper.response(response, 400, "Bad Request");
     }
   },
+  getById: async (request, response) => {
+    try {
+      const { id } = request.params;
+      const result = await getById(id);
+      if (result.length > 0) {
+        return helper.response(
+          response,
+          200,
+          "Success Get Agenda by ID",
+          result
+        );
+      } else {
+        return helper.response(response, 404, `ID Agenda : ${id} Not Found`);
+      }
+    } catch (error) {
+      return helper.response(response, 400, "Bad Request", error);
+    }
+  },
   create: async (request, response) => {
     const { title, start_time, end_time, location, description } = request.body;
 
@@ -18,7 +42,7 @@ module.exports = {
       start_time,
       end_time,
       location,
-      description
+      description,
     };
     try {
       const result = await create(setData);
@@ -33,7 +57,7 @@ module.exports = {
     }
   },
   update: async (request, response) => {
-    const { title, start_time, end_time, location } = request.body;
+    const { title, start_time, end_time, location, description } = request.body;
     const id = request.params.id;
 
     const setData = {
