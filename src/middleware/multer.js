@@ -7,17 +7,14 @@ const storage = multer.diskStorage({
     callback(null, "./uploads/");
   },
   filename: (request, file, callback) => {
-    callback(
-      null,
-      new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
-    );
+    const fileName = file.originalname;
+    const newName = fileName.replace(/\s/g, "_");
+    callback(null, new Date().toISOString().replace(/:/g, "-") + "-" + newName);
   },
 });
 
 const fileFilter = (request, file, callback) => {
-  if (
-    file.mimetype === "application/pdf"
-  ) {
+  if (file.mimetype === "application/pdf") {
     callback(null, true);
   } else {
     return callback(new Error("Extension File harus dalam bentuk pdf"));
